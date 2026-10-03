@@ -1,0 +1,96 @@
+<main class="register-page">
+  <a class="brand" routerLink="/login" aria-label="DevStar home">
+    <span class="brand-mark" aria-hidden="true">D</span>
+    <span>DevStar<span class="brand-dot">.</span></span>
+  </a>
+
+  <section class="register-layout" aria-label="Create a DevStar account">
+    <aside class="welcome-panel">
+      <div class="orbit orbit-one" aria-hidden="true"></div>
+      <div class="orbit orbit-two" aria-hidden="true"></div>
+      <div class="welcome-content">
+        <span class="panel-label"><span aria-hidden="true">✦</span> A FRESH START</span>
+        <h1>A little space<br />to <span>begin again.</span></h1>
+        <p>Create your account and make a place for the things that matter to you.</p>
+        <div class="quote-card">
+          <span class="quote-mark" aria-hidden="true">“</span>
+          <p>Every meaningful journey begins with a first step.</p>
+          <span class="quote-rule" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="panel-footer"><span aria-hidden="true">✦</span> YOUR SPACE. YOUR PACE.</div>
+    </aside>
+
+    <section class="form-panel" aria-labelledby="register-heading">
+      @if (registrationComplete()) {
+        <div class="form-content confirmation" role="status">
+          <span class="success-mark" aria-hidden="true">✓</span>
+          <p class="form-eyebrow">YOU’RE ALL SET</p>
+          <h2 id="register-heading">Account created</h2>
+          <p class="form-intro">Your DevStar account is ready. Sign in to continue.</p>
+          <a class="submit-button" routerLink="/login">Go to sign in <span aria-hidden="true">→</span></a>
+        </div>
+      } @else {
+        <div class="form-content">
+          <p class="form-eyebrow">START SOMETHING GOOD</p>
+          <h2 id="register-heading">Create account</h2>
+          <p class="form-intro">A few details and you’re on your way.</p>
+
+          <form [formGroup]="registerForm" (ngSubmit)="register()" novalidate>
+            <div class="form-group">
+              <label for="register-email">Email address</label>
+              <div class="input-wrap">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M4 6.5h16v11H4zM4.5 7l7.5 6 7.5-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                <input id="register-email" type="email" formControlName="email" placeholder="you@example.com" autocomplete="email" [attr.aria-invalid]="registerForm.controls.email.invalid && registerForm.controls.email.touched" aria-describedby="register-email-error" />
+              </div>
+              @if (registerForm.controls.email.touched && registerForm.controls.email.hasError('required')) {
+                <p class="field-error" id="register-email-error">Please enter your email address.</p>
+              } @else if (registerForm.controls.email.touched && registerForm.controls.email.hasError('email')) {
+                <p class="field-error" id="register-email-error">Enter a valid email address.</p>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="register-password">Password</label>
+              <div class="input-wrap">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.7" /><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg>
+                <input id="register-password" type="password" formControlName="password" placeholder="At least 6 characters" autocomplete="new-password" [attr.aria-invalid]="registerForm.controls.password.invalid && registerForm.controls.password.touched" aria-describedby="register-password-error" />
+              </div>
+              @if (registerForm.controls.password.touched && registerForm.controls.password.hasError('required')) {
+                <p class="field-error" id="register-password-error">Please choose a password.</p>
+              } @else if (registerForm.controls.password.touched && registerForm.controls.password.hasError('minlength')) {
+                <p class="field-error" id="register-password-error">Use at least 6 characters.</p>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="confirm-password">Confirm password</label>
+              <div class="input-wrap">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.7" /><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg>
+                <input id="confirm-password" type="password" formControlName="confirmPassword" placeholder="Enter your password again" autocomplete="new-password" [attr.aria-invalid]="registerForm.hasError('passwordsMismatch') && registerForm.controls.confirmPassword.touched" aria-describedby="confirm-password-error" />
+              </div>
+              @if (registerForm.controls.confirmPassword.touched && registerForm.controls.confirmPassword.hasError('required')) {
+                <p class="field-error" id="confirm-password-error">Please confirm your password.</p>
+              } @else if (registerForm.hasError('passwordsMismatch') && registerForm.controls.confirmPassword.touched) {
+                <p class="field-error" id="confirm-password-error">These passwords do not match.</p>
+              }
+            </div>
+
+            @if (apiError(); as message) {
+              <p class="api-error" role="alert">{{ message }}</p>
+            }
+
+            <button class="submit-button" type="submit" [disabled]="registerForm.invalid || submitting()">
+              <span>{{ submitting() ? 'Creating account…' : 'Create account' }}</span>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </button>
+          </form>
+
+          <p class="sign-in-prompt">Already have an account? <a routerLink="/login">Sign in</a></p>
+          <div class="secure-note"><span aria-hidden="true">✓</span> Your information is protected and secure</div>
+        </div>
+      }
+      <footer class="form-footer">© 2026 DevStar <span aria-hidden="true">·</span> A little more intentional, every day.</footer>
+    </section>
+  </section>
+</main>

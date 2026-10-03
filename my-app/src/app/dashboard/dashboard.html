@@ -1,0 +1,72 @@
+<main class="dashboard-shell">
+	<div class="ambient ambient-one" aria-hidden="true"></div>
+	<div class="ambient ambient-two" aria-hidden="true"></div>
+
+	<header class="topbar">
+		<a class="brand" routerLink="/dashboard" aria-label="DevStar home">
+			<span class="brand-mark" aria-hidden="true">D</span>
+			<span>DevStar<span class="brand-dot">.</span></span>
+		</a>
+		<button class="logout-button" type="button" (click)="logout()">
+			<svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+				<path d="M10 17l5-5-5-5M15 12H3m9-8h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+			</svg>
+			<span>Log out</span>
+		</button>
+	</header>
+
+	<section class="welcome-section" aria-labelledby="welcome-title">
+		<p class="eyebrow"><span class="eyebrow-line"></span> YOUR PERSONAL SPACE</p>
+		<h1 id="welcome-title">Welcome back<span class="heading-period">.</span></h1>
+		<p class="welcome-copy">You’re signed in and all caught up. Here’s a quick look at your account.</p>
+	</section>
+
+	<section class="account-card" aria-labelledby="account-heading">
+		<div class="card-topline">
+			<div>
+				<p class="card-kicker">ACCOUNT OVERVIEW</p>
+				<h2 id="account-heading">Your profile</h2>
+			</div>
+			<span class="status-pill"><span class="status-dot"></span> Active session</span>
+		</div>
+
+		<div class="profile-summary">
+			<div class="avatar" aria-hidden="true">{{ name()?.charAt(0) || 'U' }}</div>
+			<div class="profile-copy">
+				<p class="profile-name">{{ name() || 'Loading your profile…' }}</p>
+				<p class="profile-caption">DevStar member</p>
+			</div>
+			<span class="profile-sparkle" aria-hidden="true">✦</span>
+		</div>
+
+		<div class="details-grid">
+			<article class="detail-tile">
+				<span class="detail-icon email-icon" aria-hidden="true">
+					<svg viewBox="0 0 24 24" fill="none"><path d="M4 6.5h16v11H4zM4.5 7l7.5 6 7.5-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+				</span>
+				<div class="detail-copy">
+					<h3>Email address</h3>
+					<p>{{ myInfo()?.email || 'Loading…' }}</p>
+				</div>
+			</article>
+
+			<article class="detail-tile">
+				<span class="detail-icon id-icon" aria-hidden="true">
+					<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.7" /><path d="M5.5 19a6.5 6.5 0 0 1 13 0M19 5h2m-1-1v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg>
+				</span>
+				<div class="detail-copy">
+					<h3>Member ID</h3>
+					<p>{{ myInfo()?.id ?? 'Loading…' }}</p>
+				</div>
+			</article>
+		</div>
+
+		<footer class="card-footer">
+			<span class="secure-icon" aria-hidden="true">✓</span>
+			<p>Your account is secure and ready to go.</p>
+			<span class="footer-star" aria-hidden="true">✦</span>
+		</footer>
+	</section>
+
+	<p class="page-footnote">A little space to focus on what matters.</p>
+</main>

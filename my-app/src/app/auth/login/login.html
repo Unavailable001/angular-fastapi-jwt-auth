@@ -1,0 +1,88 @@
+<main class="login-page">
+  <a class="brand" href="/login" aria-label="DevStar home">
+    <span class="brand-mark" aria-hidden="true">D</span>
+    <span>DevStar<span class="brand-dot">.</span></span>
+  </a>
+
+  <section class="login-layout" aria-label="Sign in to DevStar">
+    <aside class="welcome-panel">
+      <div class="orbit orbit-one" aria-hidden="true"></div>
+      <div class="orbit orbit-two" aria-hidden="true"></div>
+      <div class="welcome-content">
+        <span class="panel-label"><span class="label-star" aria-hidden="true">✦</span> A CALMER WAY FORWARD</span>
+        <h1>Make room<br />for <span>what matters.</span></h1>
+        <p>Your personal space is right where you left it. Sign in and pick up at your own pace.</p>
+        <div class="quote-card">
+          <span class="quote-mark" aria-hidden="true">“</span>
+          <p>Small steps, thoughtfully taken, can take you somewhere wonderful.</p>
+          <span class="quote-rule" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="panel-footer"><span class="footer-spark" aria-hidden="true">✦</span> YOUR SPACE. YOUR PACE.</div>
+    </aside>
+
+    <section class="form-panel" aria-labelledby="login-heading">
+      <div class="form-content">
+        <div class="mobile-mark" aria-hidden="true">✦</div>
+        <p class="form-eyebrow">GOOD TO SEE YOU AGAIN</p>
+        <h2 id="login-heading">Welcome back</h2>
+        <p class="form-intro">Sign in to continue to your account.</p>
+
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <div class="input-wrap">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M4 6.5h16v11H4zM4.5 7l7.5 6 7.5-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                [attr.aria-invalid]="loginForm.controls.email.invalid && loginForm.controls.email.touched"
+                aria-describedby="email-hint"
+              />
+            </div>
+            <p class="field-hint" id="email-hint">Use the email address linked to your account.</p>
+            @if (loginForm.controls.email.touched && loginForm.controls.email.hasError('required')) {
+              <p class="field-error">Please enter your email address.</p>
+            } @else if (loginForm.controls.email.touched && loginForm.controls.email.hasError('email')) {
+              <p class="field-error">Enter a valid email address.</p>
+            }
+          </div>
+
+          <div class="form-group password-group">
+            <label for="password">Password</label>
+            <div class="input-wrap">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.7" /><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg>
+              <input
+                id="password"
+                type="password"
+                formControlName="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                [attr.aria-invalid]="loginForm.controls.password.invalid && loginForm.controls.password.touched"
+                aria-describedby="password-hint"
+              />
+            </div>
+            <p class="field-hint" id="password-hint">Your password must be at least 6 characters.</p>
+            @if (loginForm.controls.password.touched && loginForm.controls.password.hasError('required')) {
+              <p class="field-error">Please enter your password.</p>
+            } @else if (loginForm.controls.password.touched && loginForm.controls.password.hasError('minlength')) {
+              <p class="field-error">Your password must be at least 6 characters.</p>
+            }
+          </div>
+
+          <button class="submit-button" type="submit" [disabled]="loginForm.invalid">
+            <span>Sign in</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </button>
+        </form>
+
+        <div class="secure-note"><span aria-hidden="true">✓</span> Your information is protected and secure</div>
+        <p class="register-prompt">New to DevStar? <a routerLink="/register">Create an account</a></p>
+      </div>
+      <footer class="form-footer">© 2026 DevStar <span aria-hidden="true">·</span> A little more intentional, every day.</footer>
+    </section>
+  </section>
+</main>
